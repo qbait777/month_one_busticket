@@ -5,19 +5,19 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <table class="table table-border">
+            <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>Sr No</th>
                   <th>Company Name</th>
                   <th>Person Name</th>
-                  <th>Contact Name</th>
+                  <th>Contact No</th>
                   <th>City</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @for (item of clientList; track $index) {
+                <!-- @for (item of clientList; track $index) {
                 <tr>
                   <td>{{ $index + 1 }}</td>
                   <td>{{ item.companyName }}</td>
@@ -36,7 +36,7 @@
                     </button>
                   </td>
                 </tr>
-                }
+                } -->
               </tbody>
             </table>
           </div>
@@ -44,127 +44,114 @@
       </div>
     </div>
   </div>
+
   <div class="col-4">
     <div class="card">
       <div class="card-header bg-success">New Client</div>
       <div class="card-body">
-        <form #form="ngForm">
+        <form [formGroup]="projectForm">
           <div class="row">
             <div class="col-6">
-              <label for="">Person name</label>
+              <label for="">Project Name</label>
               <input
                 type="text"
-                #personName="ngModel"
-                minlength="5"
-                required
-                name="contactPersonName"
-                [(ngModel)]="clientObj.contactPersonName"
+                formControlName="projectName"
                 class="form-control"
-                name="contactPersonName"
-              />
-              @if (personName.touched) {
-              <div class="text-danger">
-                @if(personName?.errors?.['required']){
-                <span>This is required</span>
-                } @if(personName?.errors?.['minlength']) {
-                <span>Min Character are 5</span>
-                }
-              </div>
-              }
-            </div>
-            <div class="col-6">
-              <label for="">Company Name</label>
-              <input
-                type="text"
-                [(ngModel)]="clientObj.companyName"
-                class="form-control"
-                name="companyName"
               />
             </div>
             <div class="col-6">
-              <label for="">Contact No</label>
+              <label for="">Start Date</label>
               <input
-                type="text"
-                [(ngModel)]="clientObj.contactNo"
+                type="date"
+                formControlName="startDate"
                 class="form-control"
-                name="contactNo"
               />
             </div>
             <div class="col-6">
-              <label for="">City</label>
+              <label for="">Expected End Date</label>
               <input
-                type="text"
-                [(ngModel)]="clientObj.city"
+                type="date"
+                formControlName="expectedEndDate"
                 class="form-control"
-                name="city"
               />
             </div>
             <div class="col-6">
-              <label for="">State</label>
+              <label for="">Contact Name</label>
               <input
                 type="text"
-                [(ngModel)]="clientObj.state"
+                formControlName="contactPerson"
                 class="form-control"
-                name="state"
               />
             </div>
             <div class="col-6">
-              <label for="">Pincode</label>
+              <label for="">Contact Mobile</label>
               <input
                 type="text"
-                [(ngModel)]="clientObj.pincode"
+                formControlName="contactPersonContactNo"
                 class="form-control"
-                name="pincode"
               />
             </div>
             <div class="col-6">
-              <label for="">Adress</label>
+              <label for="">Contact Email</label>
+              <input
+                type="text"
+                formControlName="contactPersonEmailId"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Total Employee Count</label>
+              <input
+                type="text"
+                formControlName="totalEmpWorking"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Project Costing</label>
+              <input
+                type="text"
+                formControlName="projectCost"
+                class="form-control"
+              />
+            </div>
+            <div class="col-12">
+              <label for="">Project Description</label>
               <textarea
-                [(ngModel)]="clientObj.address"
+                formControlName="projectDetails"
                 class="form-control"
-                name="address"
               ></textarea>
             </div>
             <div class="col-6">
-              <label for="">Employee Strength</label>
-              <input
-                type="text"
-                [(ngModel)]="clientObj.employeeStrength"
-                class="form-control"
-                name="employeeStrength"
-              />
+              <label for="">Select Client</label>
+              <select formControlName="clientId" class="form-control">
+                <option value="">Select Client</option>
+                @for (item of clientList; track $index) {
+                <option [value]="item.clientId">
+                  {{ item.companyName }}
+                </option>
+                }
+              </select>
             </div>
             <div class="col-6">
-              <label for="">Gst No</label>
-              <input
-                type="text"
-                [(ngModel)]="clientObj.gstNo"
-                class="form-control"
-                name="gstNo"
-              />
-            </div>
-            <div class="col-6">
-              <label for="">Reg No</label>
-              <input
-                type="text"
-                [(ngModel)]="clientObj.regNo"
-                class="form-control"
-                name="regNo"
-              />
+              <label for="">Lead By</label>
+              <select formControlName="leadByEmpId" class="form-control">
+                <option value="">Select Employee</option>
+                @for (item of employeeList; track $index) {
+                <option [value]="item.empId">
+                  {{ item.empName }} - {{ item.empCode }}
+                </option>
+                }
+              </select>
             </div>
           </div>
+
           <div class="row pt-2">
             <div class="col-6 text-center">
               <button class="btn btn-secondary">Reset</button>
             </div>
             <div class="col-6 text-center">
-              <button
-                class="btn btn-success"
-                [disabled]="!form.valid"
-                (click)="onSaveClien()"
-              >
-                {{ clientObj.clientId != 0 ? "Update Client" : "Save Client" }}
-              </button>
+              <button class="btn btn-success">Save Project</button>
             </div>
           </div>
         </form>
