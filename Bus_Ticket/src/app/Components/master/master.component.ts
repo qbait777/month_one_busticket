@@ -6,16 +6,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-master',
   standalone: true,
-  imports: [DesignationComponent,RolesComponent,CommonModule],
+  imports: [DesignationComponent, RolesComponent, CommonModule],
   templateUrl: './master.component.html',
-  styleUrl: './master.component.css'
+  styleUrl: './master.component.css',
 })
 export class MasterComponent {
-
-  currentComponent: string = "Roles";
-  changeTab(tanName:string){
+  currentComponent: string = 'Roles';
+  changeTab(tanName: string) {
     this.currentComponent = tanName;
   }
- 
-
 }

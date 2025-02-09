@@ -10,6 +10,9 @@ export class Client {
   gstNo: string;
   contactNo: string;
   regNo: string;
+  empId: any;
+  employeeName: any;
+  empCode: any;
 
   constructor() {
     this.clientId = 0;
